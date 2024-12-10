@@ -3,7 +3,9 @@ package com.example.tptests
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.property.Arb
 import io.kotest.property.arbitrary.arbitrary
+import io.kotest.property.arbitrary.int
 import io.kotest.property.checkAll
 
 class UnitTests : FunSpec({
@@ -109,6 +111,18 @@ class UnitTests : FunSpec({
                 act()
             }
             exception.message shouldBe "Letter must be uppercase"
+        }
+    }
+    test("put any negative number should returns an error") {
+        val negativeNumbers = Arb.int(Int.MIN_VALUE, -1)
+        val cesar = CesarCypher()
+
+        checkAll(negativeNumbers) { anyNumber ->
+            fun act() = cesar.cypher(letter = 'A', shift = anyNumber)
+            val exception = shouldThrow<IllegalArgumentException> {
+                act()
+            }
+            exception.message shouldBe "Number must be positive"
         }
     }
 })
