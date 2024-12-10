@@ -3,8 +3,11 @@ package com.example.tptests
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.property.arbitrary.arbitrary
+import io.kotest.property.checkAll
 
 class UnitTests : FunSpec({
+    // Examples
     test("put letter 'A' and number '2' should returns letter 'C'") {
         // Arrange
         val letter = 'A'
@@ -70,5 +73,23 @@ class UnitTests : FunSpec({
             act()
         }
         exception.message shouldBe "Number must be positive"
+    }
+
+    // Properties
+    test("put any letter and number '0' should returns input letter") {
+        val alphabet = ('A'..'Z').toMutableList()
+
+        val upperCaseLetters = arbitrary { alphabet.random() }
+
+        checkAll(upperCaseLetters) { anyLetter ->
+            // Arrange
+            val cesar = CesarCypher()
+
+            // Act
+            val res = cesar.cypher(letter = anyLetter, shift = 0)
+
+            // Assert
+            res shouldBe anyLetter
+        }
     }
 })
