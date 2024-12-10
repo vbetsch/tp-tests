@@ -92,4 +92,23 @@ class UnitTests : FunSpec({
             res shouldBe anyLetter
         }
     }
+    test("put any lowercase letter should returns an error") {
+        val alphabet = ('a'..'z').toMutableList()
+
+        val lowerCaseLetters = arbitrary { alphabet.random() }
+
+        checkAll(lowerCaseLetters) { anyLetter ->
+            // Arrange
+            val cesar = CesarCypher()
+
+            // Act
+            fun act() = cesar.cypher(letter = anyLetter, shift = 0)
+
+            // Assert
+            val exception = shouldThrow<IllegalArgumentException> {
+                act()
+            }
+            exception.message shouldBe "Letter must be uppercase"
+        }
+    }
 })
