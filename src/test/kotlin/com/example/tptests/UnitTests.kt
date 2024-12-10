@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-class AppTest : FunSpec({
+class UnitTests : FunSpec({
     test("put letter 'A' and number '2' should returns letter 'C'") {
         // Arrange
         val letter = 'A'
