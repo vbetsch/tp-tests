@@ -10,6 +10,7 @@ class CesarCypher {
                 IllegalStateException("Original cause: illegal state")
             )
         }
-        return alphabet.elementAt(alphabet.indexOf(letter) + shift)
+        val indexToReturn = alphabet.indexOf(letter) + shift
+        return alphabet.elementAt(indexToReturn.mod(alphabet.size))
     }
 }

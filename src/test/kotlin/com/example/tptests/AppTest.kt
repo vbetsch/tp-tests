@@ -32,4 +32,16 @@ class AppTest : FunSpec({
         }
         exception.message shouldBe "Letter must be uppercase"
     }
+    test("put letter 'X' and number '4' should returns letter 'B'") {
+        // Arrange
+        val letter = 'X'
+        val number = 4
+        val cesar = CesarCypher()
+
+        // Act
+        val res = cesar.cypher(letter = letter, shift = number)
+
+        // Assert
+        res shouldBe 'B'
+    }
 })
