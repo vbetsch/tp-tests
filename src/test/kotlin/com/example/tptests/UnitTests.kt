@@ -41,7 +41,7 @@ class UnitTests : FunSpec({
         // Assert
         res shouldBe 'B'
     }
-    test("put letter 'a' should return an error") {
+    test("put letter 'a' should returns an error") {
         // Arrange
         val letter = 'a'
         val number = 7
