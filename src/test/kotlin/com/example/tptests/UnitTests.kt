@@ -56,7 +56,7 @@ class UnitTests : FunSpec({
         }
         exception.message shouldBe "Letter must be uppercase"
     }
-    test("put number '-1' should return an error") {
+    test("put number '-1' should returns an error") {
         // Arrange
         val letter = 'A'
         val number = -1
