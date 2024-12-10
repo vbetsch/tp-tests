@@ -56,4 +56,19 @@ class AppTest : FunSpec({
         }
         exception.message shouldBe "Letter must be uppercase"
     }
+    test("put number '-1' should return an error") {
+        // Arrange
+        val letter = 'A'
+        val number = -1
+        val cesar = CesarCypher()
+
+        // Act
+        fun act() = cesar.cypher(letter = letter, shift = number)
+
+        // Assert
+        val exception = shouldThrow<IllegalArgumentException> {
+            act()
+        }
+        exception.message shouldBe "Number must be positive"
+    }
 })

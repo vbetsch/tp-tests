@@ -7,7 +7,11 @@ class CesarCypher {
         if (letter.isLowerCase()) {
             throw IllegalArgumentException(
                 "Letter must be uppercase",
-                IllegalStateException("Original cause: illegal state")
+            )
+        }
+        if (shift < 0) {
+            throw IllegalArgumentException(
+                "Number must be positive",
             )
         }
         val indexToReturn = alphabet.indexOf(letter) + shift
