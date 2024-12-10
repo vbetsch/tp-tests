@@ -80,14 +80,12 @@ class UnitTests : FunSpec({
 
     context("Properties") {
         test("put any letter and number '0' should returns input letter") {
+            // Arrange
+            val cesar = CesarCypher()
             val alphabet = ('A'..'Z').toMutableList()
-
             val upperCaseLetters = arbitrary { alphabet.random() }
 
             checkAll(upperCaseLetters) { anyLetter ->
-                // Arrange
-                val cesar = CesarCypher()
-
                 // Act
                 val res = cesar.cypher(letter = anyLetter, shift = 0)
 
@@ -96,14 +94,12 @@ class UnitTests : FunSpec({
             }
         }
         test("put any lowercase letter should returns an error") {
+            // Arrange
+            val cesar = CesarCypher()
             val alphabet = ('a'..'z').toMutableList()
-
             val lowerCaseLetters = arbitrary { alphabet.random() }
 
             checkAll(lowerCaseLetters) { anyLetter ->
-                // Arrange
-                val cesar = CesarCypher()
-
                 // Act
                 fun act() = cesar.cypher(letter = anyLetter, shift = 0)
 
@@ -115,11 +111,15 @@ class UnitTests : FunSpec({
             }
         }
         test("put any negative number should returns an error") {
-            val negativeNumbers = Arb.int(Int.MIN_VALUE, -1)
+            // Arrange
             val cesar = CesarCypher()
+            val negativeNumbers = Arb.int(Int.MIN_VALUE, -1)
 
             checkAll(negativeNumbers) { anyNumber ->
+                // Act
                 fun act() = cesar.cypher(letter = 'A', shift = anyNumber)
+
+                // Assert
                 val exception = shouldThrow<IllegalArgumentException> {
                     act()
                 }
