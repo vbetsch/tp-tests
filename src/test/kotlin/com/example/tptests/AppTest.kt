@@ -26,10 +26,10 @@ class AppTest : FunSpec({
         // Act
         fun act() = cesar.cypher(letter = letter, shift = number)
 
-
         // Assert
-        shouldThrow<IllegalArgumentException> {
+        val exception = shouldThrow<IllegalArgumentException> {
             act()
         }
+        exception.message shouldBe "Letter must be uppercase"
     }
 })
